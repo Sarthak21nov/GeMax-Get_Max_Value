@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import Searchbar from '../Components/SearchBar'
+import Searchbar from '../Components/Searchbar'
 import Footer from '../Components/Footer'
 
 function Stationery() {
