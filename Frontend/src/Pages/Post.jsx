@@ -1,33 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
+import Footer from '../Components/Footer';
+import AddNewCard from '../Components/AddNewCard';
 
 function Post() {
 
-  const[selectedFiles, SetSelectedFiles] = useState(null);
-
-  function HandleFileChange(e){
-    SetSelectedFiles(e.target.files)
-  }
-
-  function HandleSubmit(){
-
-  }
-
   return (
     <div>
-      <div className='text-black text-5xl font-bold text-center m-3'>
-        <p>Product Description</p>
+      <div className='text-5xl font-bold text-center p-2'>
+        <p>Publish a New Product</p>
       </div>
-      <div className='flex justify-center items-center'>
-        <p className='text-xl'>Upload the product Image</p>
-        <form onSubmit={HandleSubmit}></form>
+      <div>
+        <AddNewCard/>
       </div>
-      {/* <form onSubmit={HandleSubmit} className=''>
-        <div className='text-black text-xl'>
-          <p className='text-black font-medium'>Upload Images</p>
-          <input type='file' name='images' multiple accept='/*' onChange={HandleFileChange}/>
-        </div>  
-      </form> */}
+      <Footer/>
     </div>
   )
 }
