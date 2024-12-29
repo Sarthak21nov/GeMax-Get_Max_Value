@@ -4,7 +4,7 @@ import ElectronicImg from '../assets/electronicsImg.avif'
 import FashionImg from '../assets/fashionImg.webp'
 import HomeImg from '../assets/homeImg.webp'
 import EssentialImg from '../assets/download.jpeg'
-import BeautiImg from '../assets/beautiImg.webp'
+import Beauty from '../assets/beautyImg.webp';
 import SportsImg from '../assets/sportsImg.jpeg'
 import StationeryImg from '../assets/stationaryImg.png'
 import TravelImg from '../assets/travelImg.jpeg'
@@ -49,7 +49,7 @@ function Home() {
         <Link to='/Fashion'><CategoryCard text="Fashion" image={FashionImg}/></Link>
         <Link to='/HomeAndLiving'><CategoryCard text="Home and Living" image={HomeImg}/></Link>
         <Link to='/Essentials'><CategoryCard text="Essentials" image={EssentialImg}/></Link>
-        <Link to='/Beauty'><CategoryCard text="Beauty and Health" image={BeautiImg}/></Link>
+        <Link to='/Beauty'><CategoryCard text="Beauty and Health" image={Beauty}/></Link>
         <Link to='/Stationery'><CategoryCard text="Stationeries" image={StationeryImg}/></Link>
         <Link to='/Sports'><CategoryCard text="Sports and Games" image={SportsImg}/></Link>
         <Link to='/Travel'><CategoryCard text="Travel Products" image={TravelImg}/></Link>
