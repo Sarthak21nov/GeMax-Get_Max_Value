@@ -10,3 +10,20 @@
 .glow:hover {
     box-shadow: 0 0 30px 10px rgba(1, 18, 18, 0.6); /* Stronger glow on hover */
 }
+
+@keyframes appear{
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    } 
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.time-fade {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}

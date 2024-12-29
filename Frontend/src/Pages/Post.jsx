@@ -8,7 +8,7 @@ function Post() {
   return (
     <div>
       <div className='text-5xl font-bold text-center p-2'>
-        <p>Publish a New Product</p>
+        <p className='p-4'>Publish a New Product</p>
       </div>
       <div>
         <AddNewCard/>
