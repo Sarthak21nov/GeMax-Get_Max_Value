@@ -17,6 +17,7 @@ import Sports from '../src/CategoryPages/Sports.jsx'
 import Travel from '../src/CategoryPages/Travel.jsx'
 import Others from '../src/CategoryPages/Others.jsx'
 import SignUp from '../src/Components/Signup.jsx'
+import Profile from './Pages/Profile.jsx'
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
           <Route path='/Travel' element={<Travel/>}/>
           <Route path='/Others' element={<Others/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
+          <Route path='/Profile' element={<Profile/>}/>
         </Routes>
       </BrowserRouter>
     </div>
