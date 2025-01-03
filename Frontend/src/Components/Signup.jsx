@@ -8,6 +8,7 @@ function Signup() {
   const[Email, SetEmail] = useState("")
   const[Password, SetPassword] = useState("")
   const[alert, SetAlert] = useState("")
+  const[ProfileImg, SetProfileImg] = useState([])
 
   const HandleNameChange = (e)=>{
     SetName(e.target.value)
@@ -25,6 +26,13 @@ function Signup() {
     SetPassword(e.target.value)
   }
 
+  const HandleFileChange = (e)=>{
+    const files = Array.from(e.target.files)
+    const imageURLs = files.map((file)=>URL.createObjectURL(file))
+    SetProfileImg(imageURLs)
+  }
+
+
   const HandleSubmit = (e)=>{
     e.preventDefault()
     if(!Name || !PhoneNumber || !Email || !Password){
@@ -35,12 +43,13 @@ function Signup() {
       SetEmail("")
       SetPassword("")
       SetAlert("")
+      SetProfileImg([])
     }
   }
 
   return (
     <div>
-      <div className='w-full h-[100vh] bg-gradient-to-r from-white to-black flex justify-center items-center'>
+      <div className='w-full min-h-[100vh] bg-gradient-to-r from-white to-black flex justify-center items-center p-6'>
         <form className='bg-white w-[80%] min-h-[60vh] md:w-[30%] md:min-h-[70vh] flex-row rounded-3xl shadow-2xl glow' onSubmit={HandleSubmit}>
           <p className='m-4 text-4xl font-serif'>Sign Up</p>
           {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
@@ -53,9 +62,28 @@ function Signup() {
           <i><p className='mt-6 ml-6 text-lg font-serif'>Email-ID: </p></i>
           <input type='email' placeholder='Enter your E-Mail ID' className='p-2 border-2 border-solid rounded-full w-[90%] shadow-xl ml-5' value={Email} onChange={HandleEmailChange}/>
 
+          <div className='flex-row'>
+            <i><label htmlFor='dropdown' className='mt-6 ml-6 text-lg font-serif'>Gender: </label></i>
+            <select id='dropdown' className='w-[90%] p-2 ml-6 border-2 border-solid'>
+              <option value='Male'>Male</option>
+              <option value='Female'>Female</option>
+              <option value='Other'>Other</option>
+            </select> 
+          </div>
           <i><p className='mt-6 ml-6 text-lg font-serif'>Password: </p></i>
           <input type='password' placeholder='Enter your Password' className='p-2 border-2 border-solid rounded-full w-[90%] shadow-xl ml-5' value={Password} onChange={HandlePasswordChange}/>
           
+          <i><p className='mt-6 ml-6 text-lg font-serif'>Profile Picture: </p></i>
+          {ProfileImg.length == 0 ? <input type='file' name='images' accept='images/*' onChange={HandleFileChange} className='p-2 ml-3'/> : <input type='file' name='images' accept='images/*' onChange={HandleFileChange} className='hidden'/>}
+
+          <div>
+            {ProfileImg.length > 0 && ProfileImg.map((image, index)=>(
+              <img src={image} key={index} width={100} height={100} className='mt-6 ml-6 hover:cursor-pointer'/>  
+            ))}
+          </div>
+
+          
+
           <div className='flex justify-center items-center'>
             <button type="submit" className="btn btn-dark mt-4 mb-4 m-auto rounded-full">Sign Up</button>
           </div>

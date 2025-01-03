@@ -40,7 +40,7 @@ function AddNewCard() {
     }
   }
   return (
-    <div className='bg-gradient-to-b from-slate-100 to-black p-4'>
+    <div className='bg-gradient-to-b from-slate-100 to-black p-4 h-full'>
       <form className='w-100 min-h-[600px] flex justify-center items-center' onSubmit={HandleSubmit}>
         <div className='sm:w-[40%] w-[80%] flex-row min-h-[400px] bg-slate-100 shadow-3xl rounded-lg p-2 glow'>
             {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
@@ -59,7 +59,8 @@ function AddNewCard() {
                 <i><p className='mt-3'>Description: </p></i>
                 <textarea placeholder='Product Description' value={ProdDescription} onChange={HandleDescriptionChange} className='w-full min-h-[100px] p-2'/>
                 <i><label htmlFor='dropdown' className='mt-3'>Choose an Option: </label></i>
-                <select id='dropdown' className='w-full p-2'>
+
+                <select id='dropdown' className='w-full p-2' required>
                     <option value=''>Select an Option</option>
                     <option value='Electronics'>Electronics</option>
                     <option value='Beauty'>Beauty</option>
@@ -69,7 +70,8 @@ function AddNewCard() {
                     <option value='Sports'>Sports</option>
                     <option value='Stationery'>Stationery</option>
                     <option value='Travel'>Travel</option>
-                </select>     
+                </select>
+
                 <div className='flex gap-6 mt-3'>
                     <i><p>Seller Name: </p></i>
                     <p>{SellerName}</p>

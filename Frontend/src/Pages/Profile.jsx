@@ -2,10 +2,12 @@
 import React, { useState } from 'react'
 import DefaultImage from '../assets/defaultProfile.jpg'
 import Footer from '../Components/Footer'
+import ProductCard from '../Components/ProductCard'
 
 function Profile() {
 
   const[ChangeProfilePic, SetProfilePic] = useState(false)
+  const[PublishedGig, SetPublishedGig] = useState([])
 
   const HandleProfileChange = (e)=>{
     SetProfilePic(!ChangeProfilePic)
@@ -15,8 +17,9 @@ function Profile() {
 
   }
   return (
-    <div className='flex justify-center items-center'>
-      <div className= 'w-[60%] h-[80vh] bg-slate-200 shadow-2xl rounded-lg m-5'>
+    <div className='flex flex-col min-h-screen'>
+    <div className='flex-grow flex justify-center items-center overflow-y-hidden'>
+      <div className= 'w-[60%] h-[80vh] bg-slate-200 shadow-2xl rounded-lg m-5 glow'>
         <div className='flex justify-center items-center pt-[10vh]'>
           <img src={DefaultImage} alt="Profile Pic" className='h-[70px] w-[70px] rounded-full shadow-2xl hover:cursor-pointer' onClick={HandleProfileChange}/>
         </div>
@@ -40,6 +43,7 @@ function Profile() {
           <button type="button" className="btn btn-dark" onClick={HandleLogout}>Sign Out</button>
         </div>
       </div>
+    </div> 
     </div>
   )
 }
