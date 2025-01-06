@@ -9,7 +9,7 @@ const CustomerData = mongoose.Schema({
         type:Number,
         required: true,
     },
-    EmailId:{
+    Email:{
         type: String,
         required: true,
     },
@@ -22,7 +22,8 @@ const CustomerData = mongoose.Schema({
         required: true,
     },
     ProfilePic:{
-        
+        type: String,
+        default: 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'
     }
 })
 

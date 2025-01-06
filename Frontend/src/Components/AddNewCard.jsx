@@ -40,7 +40,7 @@ function AddNewCard() {
     }
   }
   return (
-    <div className='bg-gradient-to-b from-slate-100 to-black p-4 h-full'>
+    <div className='bg-gradient-to-b from-white to-slate-200 p-4 h-full'>
       <form className='w-100 min-h-[600px] flex justify-center items-center' onSubmit={HandleSubmit}>
         <div className='sm:w-[40%] w-[80%] flex-row min-h-[400px] bg-slate-100 shadow-3xl rounded-lg p-2 glow'>
             {alert && <div className="alert alert-danger" role="alert">{alert}</div>}

@@ -74,7 +74,7 @@ function Signup() {
           <input type='password' placeholder='Enter your Password' className='p-2 border-2 border-solid rounded-full w-[90%] shadow-xl ml-5' value={Password} onChange={HandlePasswordChange}/>
           
           <i><p className='mt-6 ml-6 text-lg font-serif'>Profile Picture: </p></i>
-          {ProfileImg.length == 0 ? <input type='file' name='images' accept='images/*' onChange={HandleFileChange} className='p-2 ml-3'/> : <input type='file' name='images' accept='images/*' onChange={HandleFileChange} className='hidden'/>}
+          {ProfileImg.length == 0 ? <input type='file' name='ProfilePic' accept='images/*' onChange={HandleFileChange} className='p-2 ml-3'/> : <input type='file' name='images' accept='images/*' onChange={HandleFileChange} className='hidden'/>}
 
           <div>
             {ProfileImg.length > 0 && ProfileImg.map((image, index)=>(
