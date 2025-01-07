@@ -19,6 +19,7 @@ const CustomerData = mongoose.Schema({
     },
     Password:{
         type: String,
+        minLength: [8, 'Password must be minimum 8 characters long'],
         required: true,
     },
     ProfilePic:{

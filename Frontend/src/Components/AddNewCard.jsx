@@ -58,7 +58,7 @@ function AddNewCard() {
                 </div>
                 <i><p className='mt-3'>Description: </p></i>
                 <textarea placeholder='Product Description' value={ProdDescription} onChange={HandleDescriptionChange} className='w-full min-h-[100px] p-2'/>
-                <i><label htmlFor='dropdown' className='mt-3'>Choose an Option: </label></i>
+                <i><label htmlFor='dropdown' className='mt-3'>Choose Category: </label></i>
 
                 <select id='dropdown' className='w-full p-2' required>
                     <option value=''>Select an Option</option>
