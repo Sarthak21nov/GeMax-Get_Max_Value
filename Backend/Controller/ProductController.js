@@ -8,6 +8,7 @@ export const AddProduct = async (req,res)=>{
     }
 
     const ProductImages = req.files
+    console.log(ProductImages)
 
     if(!ProductImages){
         return res.status(400).json({"message": "Please upload minimum 2 images and maximum 10 images of the product"})
@@ -20,12 +21,14 @@ export const AddProduct = async (req,res)=>{
     try{
         const UserCredentials = await CustData.findById(CustomerID)
         if(!UserCredentials){
-            return res.status(400).json({"message": "Please Log in First to Add Product"})
+            return res.status(400).json({"message": "UnAuthorized"})
         }
         const CustomerName = UserCredentials.Name
 
+        const imagePaths = ProductImages.map((file) => file.path);
+
         const newProduct = new ProductData({
-            ProductImages,
+            ProductImages: imagePaths,
             ProductName,
             ProductPrice,
             ProductDescription,
@@ -36,8 +39,8 @@ export const AddProduct = async (req,res)=>{
 
         await newProduct.save()
         return res.status(200).json({"message": "Product Added Successfully"})
-    } catch(err){
-        return res.status(500).json({"message": "Internal Server Error"})
+    } catch(SaveError){
+        return res.status(500).json({"message": "Internal Server Error", "Error": SaveError})
     }
 
 }

@@ -2,13 +2,7 @@ import mongoose from 'mongoose'
 
 const ProductSchema = mongoose.Schema({
     ProductImages:{
-        type: String,
-        validate: {
-            validator: function(array) {
-                return array.length >= 2 && array.length <= 10
-            },
-            message: "Please upload minimum 2 images and maximum 10 images"
-        },
+        type: [String],
         required: true
     },
     ProductName:{

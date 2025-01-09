@@ -41,12 +41,12 @@ function AddNewCard() {
   }
   return (
     <div className='bg-gradient-to-b from-white to-slate-200 p-4 h-full'>
-      <form className='w-100 min-h-[600px] flex justify-center items-center' onSubmit={HandleSubmit}>
+      <form className='w-100 min-h-[600px] flex justify-center items-center' onSubmit={HandleSubmit} encType='multipart/form-data'>
         <div className='sm:w-[40%] w-[80%] flex-row min-h-[400px] bg-slate-100 shadow-3xl rounded-lg p-2 glow'>
             {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
             <div className='flex-row'>
                 <i><p className='font-serif text-xl pl-2 mt-3'>Product Images: </p></i>
-                <input type='file' name='images' multiple accept='/*' onChange={HandleFileChange} className='p-2'/>
+                <input type='file' name='ProductImages' multiple accept='/*' onChange={HandleFileChange} className='p-2'/>
             </div>
             <div className='text-xl font-serif p-2'>
                 <i><p className='mt-3'>Product Name: </p></i>

@@ -50,7 +50,7 @@ function Signup() {
   return (
     <div>
       <div className='w-full min-h-[100vh] bg-gradient-to-r from-white to-black flex justify-center items-center p-6'>
-        <form className='bg-white w-[80%] min-h-[60vh] md:w-[30%] md:min-h-[70vh] flex-row rounded-3xl shadow-2xl glow' onSubmit={HandleSubmit}>
+        <form className='bg-white w-[80%] min-h-[60vh] md:w-[30%] md:min-h-[70vh] flex-row rounded-3xl shadow-2xl glow' onSubmit={HandleSubmit} encType='multipart/form-data'>
           <p className='m-4 text-4xl font-serif'>Sign Up</p>
           {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
           <i><p className='mt-6 ml-6 text-lg font-serif'>Name: </p></i>
