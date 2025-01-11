@@ -1,9 +1,31 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Searchbar from '../Components/Searchbar'
 import Footer from '../Components/Footer'
+import axios from 'axios'
+
 
 function Electronics() {
+
+  const[Products, SetProducts] = useState([])
+
+  const initialLoading = ()=>{
+    const response = axios.get('http://localhost:8000/api/products/Category', {
+      "Category": "Electronics"
+    })
+
+    console.log(response.data)
+    if(response.data.success){
+      SetProducts(response.data.Products)
+    } else{
+      alert(response.data.message)
+    }
+  }
+
+  useEffect(()=>{
+    initialLoading()
+  }, [])
+
   return (
     <div>
       <Searchbar/>

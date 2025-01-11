@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import '../App.css'
+import axios from 'axios'
 
 function AddNewCard() {
 
@@ -9,7 +10,9 @@ function AddNewCard() {
     const[Price, SetPrice] = useState(0)
     const[ProdDescription, SetProdDescription] = useState("")
     const[alert, SetAlert] = useState('')
-    const SellerName = localStorage.getItem('SellerName')
+    const[dropDown, setDropDown] = useState("")
+    const CustomerName = localStorage.getItem('CustomerName')
+    const CustomerID = localStorage.getItem('CustomerID')
 
   const HandleFileChange = (e)=>{
     SetImages(e.target.files)
@@ -32,6 +35,23 @@ function AddNewCard() {
     if(!images || !ProdName || !Price || !ProdDescription){
         SetAlert("All fields are mandatory")
     } else{
+
+        const response = axios.post('http://localhost:8000/api/products/AddProduct', {
+          ProductImages: images,
+          ProductName: ProdName,
+          ProductPrice: Price,
+          ProductDescription: ProdDescription,
+          SelectCategory: dropDown,
+          CustomerID: CustomerID
+        })
+
+        console.log(response)
+        if(response.data.success){
+          alert(response.data.message)
+        } else{
+          alert(response.data.message)
+        }
+
         SetAlert("")
         SetImages(null)
         SetProdName("")
@@ -62,19 +82,19 @@ function AddNewCard() {
 
                 <select id='dropdown' className='w-full p-2' required>
                     <option value=''>Select an Option</option>
-                    <option value='Electronics'>Electronics</option>
-                    <option value='Beauty'>Beauty</option>
-                    <option value='Essentials'>Essentials</option>
-                    <option value='Fashion'>Fashion</option>
-                    <option value='Home And Living'>Home and Living</option>
-                    <option value='Sports'>Sports</option>
-                    <option value='Stationery'>Stationery</option>
-                    <option value='Travel'>Travel</option>
+                    <option value='Electronics' onClick={setDropDown("Electronics")}>Electronics</option>
+                    <option value='Beauty' onClick={setDropDown("Beauty")}>Beauty</option>
+                    <option value='Essentials' onClick={setDropDown("Essentials")}>Essentials</option>
+                    <option value='Fashion' onClick={setDropDown("Fashion")}>Fashion</option>
+                    <option value='Home And Living' onClick={setDropDown("Home and Living")}>Home and Living</option>
+                    <option value='Sports' onClick={setDropDown("Sports")}>Sports</option>
+                    <option value='Stationery' onClick={setDropDown("Stationery")}>Stationery</option>
+                    <option value='Travel' onClick={setDropDown("Travel")}>Travel</option>
                 </select>
 
                 <div className='flex gap-6 mt-3'>
                     <i><p>Seller Name: </p></i>
-                    <p>{SellerName}</p>
+                    <p>{CustomerName}</p>
                 </div>
                 <div className='flex justify-center items-center m-2'>
                     <button type="Submit" className="btn btn-dark">Publish Product</button>

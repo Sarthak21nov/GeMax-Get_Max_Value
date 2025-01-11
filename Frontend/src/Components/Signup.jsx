@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState } from 'react'
+import axios from 'axios'
 
 function Signup() {
   const[Name, SetName] = useState("")
@@ -9,6 +10,7 @@ function Signup() {
   const[Password, SetPassword] = useState("")
   const[alert, SetAlert] = useState("")
   const[ProfileImg, SetProfileImg] = useState([])
+  const[Gender, SetGender] = useState("Choose Gender")
 
   const HandleNameChange = (e)=>{
     SetName(e.target.value)
@@ -38,6 +40,23 @@ function Signup() {
     if(!Name || !PhoneNumber || !Email || !Password){
       SetAlert("All fields are Mandatory")
     } else{
+      const response = axios.post('http://localhost:8000/api/auth/SignUp', {
+        Name: Name,
+        PhoneNumber: PhoneNumber,
+        Email: Email,
+        Gender: Gender,
+        Password: Password,
+        ProfilePic: ProfileImg
+      })
+
+      console.log(response.data)
+
+      if(response.data.success){
+        alert(response.data.message)
+      } else{
+        alert(response.data.message)
+      }
+
       SetName("")
       SetPhoneNumber(0)
       SetEmail("")
@@ -45,6 +64,7 @@ function Signup() {
       SetAlert("")
       SetProfileImg([])
     }
+
   }
 
   return (
@@ -65,9 +85,9 @@ function Signup() {
           <div className='flex-row'>
             <i><label htmlFor='dropdown' className='mt-6 ml-6 text-lg font-serif'>Gender: </label></i>
             <select id='dropdown' className='w-[90%] p-2 ml-6 border-2 border-solid'>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
-              <option value='Other'>Other</option>
+              <option value='Male' onClick={SetGender("Male")}>Male</option>
+              <option value='Female' onClick={SetGender("Female")}>Female</option>
+              <option value='Other' onClick={SetGender("Other")}>Other</option>
             </select> 
           </div>
           <i><p className='mt-6 ml-6 text-lg font-serif'>Password: </p></i>

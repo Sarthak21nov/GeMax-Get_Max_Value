@@ -5,17 +5,17 @@ import jwt from 'jsonwebtoken'
 export const SignIn = async (req, res)=>{
     const { Email, Password } = req.body 
     if( !Email || !Password){
-        return res.status(400).json({"message": "All fields are Mandatory"})
+        return res.status(400).json({"message": "All fields are Mandatory", "success": false})
     }
     try{
         const userCredentials = await CustData.findOne({Email: Email})
         if(!userCredentials){
-            return res.status(400).json({"message": "User Does not exist"})
+            return res.status(400).json({"message": "User Does not exist", "success": false})
         } 
         else{
             const userPassword = bcrypt.compare(Password, userCredentials.Password)
             if(!userPassword){
-                return res.status(400).json({"message": "Invalid Email ID or Password"})
+                return res.status(400).json({"message": "Invalid Email ID or Password", "success": false})
             } else{
                 const token = jwt.sign({id: userCredentials._id}, process.env.JWT_SECRET)
 
@@ -26,18 +26,18 @@ export const SignIn = async (req, res)=>{
                     maxAge: 72* 60 * 60 * 1000, // 72 hour in milliseconds
                 });
 
-                return res.status(200).json({"message": "Logged In Successfully", "AuthToken": token, "CustomerID": userCredentials._id})
+                return res.status(200).json({"message": "Logged In Successfully", "AuthToken": token, "CustomerID": userCredentials._id, "CustomerName": userCredentials.Name, "success": true})
             }
         }
     } catch(err){
-        return res.status(500).json({"message": "Internal Server Error"})
+        return res.status(500).json({"message": "Internal Server Error", "success": false})
     }
 }
 
 export const SignUp = async (req,res)=>{
     const { Name, PhoneNumber, Email, Gender, Password } = req.body
     if( !Name || !PhoneNumber || !Email || !Gender || !Password ){
-        return res.status(400).json({"message": "All fields are Mandatory"})
+        return res.status(400).json({"message": "All fields are Mandatory", "success": false})
     }
     
     const profilePicturePath = req.file ? `/uploads/${req.file.filename}` : null;
@@ -46,7 +46,7 @@ export const SignUp = async (req,res)=>{
     try{
         const userExist = await CustData.findOne({Email})
         if(userExist){
-            return res.status(400).json({"message": "User Already Exist"})
+            return res.status(400).json({"message": "User Already Exist", "success": false})
         }
 
         const hashedPassword = await bcrypt.hash(Password, 10)
@@ -60,8 +60,8 @@ export const SignUp = async (req,res)=>{
             ProfilePic: profilePicturePath
         })
         await newUser.save()
-        return res.status(200).json({"message": "Registration completed successfully"})
+        return res.status(200).json({"message": "Registration completed successfully", "success": true})
     } catch(err){
-        return res.status(500).json({"message": "Internal Server Error"})
+        return res.status(500).json({"message": "Internal Server Error", "success": false})
     }
 }

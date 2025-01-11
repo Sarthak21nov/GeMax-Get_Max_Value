@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
+import axios from 'axios'
 
 function Signin() {
 
@@ -20,6 +21,21 @@ function Signin() {
     if(!Email || !Password){
         SetAlert("All fields are Mandatory")
     } else{
+
+        const response = axios.post('http://localhost:8000/api/auth/SignIn', {
+          Email: Email,
+          Password: Password
+        })
+
+        console.log(response.data)
+        if(response.data.success){
+          localStorage.setItem('CustomerID', response.data.CustomerID)
+          localStorage.setItem('CustomerName', response.data.CustomerName)
+          alert(response.data.message)
+        }else{
+          alert(response.data.message)
+        }
+
         SetEmail("")
         SetPassword("")
         SetAlert("")
