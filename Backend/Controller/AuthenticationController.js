@@ -13,7 +13,7 @@ export const SignIn = async (req, res)=>{
             return res.status(400).json({"message": "User Does not exist", "success": false})
         } 
         else{
-            const userPassword = bcrypt.compare(Password, userCredentials.Password)
+            const userPassword = await bcrypt.compare(Password, userCredentials.Password)
             if(!userPassword){
                 return res.status(400).json({"message": "Invalid Email ID or Password", "success": false})
             } else{
@@ -30,6 +30,7 @@ export const SignIn = async (req, res)=>{
             }
         }
     } catch(err){
+        console.log(err)
         return res.status(500).json({"message": "Internal Server Error", "success": false})
     }
 }
@@ -64,4 +65,22 @@ export const SignUp = async (req,res)=>{
     } catch(err){
         return res.status(500).json({"message": "Internal Server Error", "success": false})
     }
+}
+
+export const getUser = async (req,res)=>{
+    const { CustomerID } = req.query
+    if(!CustomerID){
+        return res.status(400).json({"message": "PLease Login First", "success": false})  
+    }
+
+    try{
+        const userCredentials = await CustData.findOne({_id: CustomerID})
+        if(!userCredentials){
+            return res.status(400).json({"message": "User Does not exist", "success": false})
+        } else{
+            return res.status(200).json({"message": "User Found", "success": true, "data": userCredentials})
+        }
+    } catch(err){
+        return res.status(500).json({"message": "Internal Server Error", "success": false})
+    } 
 }

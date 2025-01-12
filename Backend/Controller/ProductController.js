@@ -55,7 +55,7 @@ export const ListAllProduct =  async (req,res)=>{
 }
 
 export const DeleteProductBasedOnId = async (req,res)=>{
-    const { ProductId, CustomerID }  = req.body
+    const { ProductId, CustomerID }  = req.query
     if(!ProductId || !CustomerID){
         return res.status(400).json({"message": "Unable to get Product ID or Product ID", "success": false})
     }
@@ -74,7 +74,7 @@ export const DeleteProductBasedOnId = async (req,res)=>{
 }
 
 export const ListProductBasedOnCategory = async (req,res)=>{
-    const { Category } = req.body
+    const { Category } = req.query
     if(!Category) {
         return res.status(400).json({"message": "Did not get the Category", "success": false})
     }
@@ -87,12 +87,12 @@ export const ListProductBasedOnCategory = async (req,res)=>{
 }
 
 export const ListProductBasedOnSeller = async (req,res)=>{
-    const { SellerId } = req.body 
-    if(!SellerId){
+    const { CustomerID } = req.query
+    if(!CustomerID){
         return res.status(400).json({"message": "Did Not got Seller ID", "success": false})
     }
     try{
-        const Products = await ProductData.find({CustomerID: SellerId})
+        const Products = await ProductData.find({CustomerID: CustomerID})
         return res.status(200).json({"message": "Products Found", "Products": Products, "success": true})
 
     } catch(err){

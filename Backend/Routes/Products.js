@@ -6,7 +6,7 @@ const app = express.Router()
 
 app.post('/AddProduct', upload.array('ProductImages', 10) , AddProduct)
 app.get('/listAll', ListAllProduct)
-app.delete('/DeletedProduct:id', DeleteProductBasedOnId)
+app.delete('/DeletedProduct', DeleteProductBasedOnId)
 app.get('/Category', ListProductBasedOnCategory)
 app.get('/listings', ListProductBasedOnSeller)
 

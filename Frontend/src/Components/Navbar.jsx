@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
+
 
 function Navbar() {
   const [isLoggedIn, SetLogin] = useState(false);
@@ -17,7 +18,7 @@ function Navbar() {
             <Link to='/'><li className='hover:scale-110 transition transform hover:cursor-pointer'>Home</li></Link>
             <Link to='/about'><li className='hover:scale-110 transition transform hover:cursor-pointer'>About</li></Link>
             <Link to='/addProduct'><li className='hover:scale-110 transition transform hover:cursor-pointer'>Add Product</li></Link>
-            {isLoggedIn ? <Link to='/login'><li className='hover:scale-110 transition transform hover:cursor-pointer'>Logout</li></Link> : <Link to='/login'><li className='hover:scale-110 transition transform hover:cursor-pointer'>Login</li></Link>}
+            {isLoggedIn ? <li className='hover:scale-110 transition transform hover:cursor-pointer'>Logout</li> : <Link to='/login'><li className='hover:scale-110 transition transform hover:cursor-pointer'>Login</li></Link>}
           </ul>
         </div>
       </div>
